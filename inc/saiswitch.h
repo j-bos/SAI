@@ -2266,6 +2266,14 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_TUNNEL_LOOPBACK_PACKET_ACTION,
 
     /**
+     * @brief Maximum forwarding classes limit
+     *
+     * @type sai_uint8_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_NUMBER_OF_FORWARDING_CLASSES,
+
+    /**
      * @brief End of attributes
      */
     SAI_SWITCH_ATTR_END,
