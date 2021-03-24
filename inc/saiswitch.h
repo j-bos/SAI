@@ -2288,7 +2288,7 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_QOS_DSCP_TO_FORWARDING_CLASS_MAP,
 
     /**
-     * @brief Enable DSCP -> Forwarding Class MAP on switch
+     * @brief Enable EXP -> Forwarding Class MAP on switch
      *
      * MAP id = #SAI_NULL_OBJECT_ID to disable map on switch.
      * Default no map.

@@ -1733,7 +1733,7 @@ typedef enum _sai_port_attr_t
      * @allownull true
      * @default SAI_NULL_OBJECT_ID
      */
-    SAI_PORT_ATTR_QOS_DSCP_TO_FORWARDING_CLASS_MAP,
+    SAI_PORT_ATTR_QOS_MPLS_EXP_TO_FORWARDING_CLASS_MAP,
 
     /**
      * @brief End of attributes
