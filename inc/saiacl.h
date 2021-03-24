@@ -2914,7 +2914,7 @@ typedef enum _sai_acl_entry_attr_t
      * @default disabled
      */
     SAI_ACL_ENTRY_ATTR_ACTION_SET_ECMP_HASH_ID,
-    
+
    /**
      * @brief Set virtual router
      *
