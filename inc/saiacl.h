@@ -271,6 +271,9 @@ typedef enum _sai_acl_action_type_t
     /** Set custom ECMP hash object ID */
     SAI_ACL_ACTION_TYPE_SET_ECMP_HASH_ID,
 
+    /** Associate with virtual router */
+    SAI_ACL_ACTION_TYPE_SET_VRF,
+
     /** Set Forwarding class */
     SAI_ACL_ACTION_TYPE_SET_FORWARDING_CLASS,
 
@@ -2911,9 +2914,19 @@ typedef enum _sai_acl_entry_attr_t
      * @default disabled
      */
     SAI_ACL_ENTRY_ATTR_ACTION_SET_ECMP_HASH_ID,
+    
+   /**
+     * @brief Set virtual router
+     *
+     * @type sai_acl_action_data_t sai_object_id_t
+     * @flags CREATE_AND_SET
+     * @objects SAI_OBJECT_TYPE_VIRTUAL_ROUTER
+     * @default disabled
+     */
+    SAI_ACL_ENTRY_ATTR_ACTION_SET_VRF,
 
     /**
-     * @brief Set Forwarding class
+     * @brief Set Forwarding Class
      *
      * @type sai_acl_action_data_t sai_uint8_t
      * @flags CREATE_AND_SET
