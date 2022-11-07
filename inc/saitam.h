@@ -893,6 +893,12 @@ typedef enum _sai_tam_telemetry_type_t
      */
     SAI_TAM_TELEMETRY_TYPE_INT
 
+    /**
+     * @brief Timeslice TAM
+     * Telemetry captured at short time intervals
+     */
+    SAI_TAM_TELEMETRY_TYPE_TIMESLICE
+
 } sai_tam_telemetry_type_t;
 
 /**
