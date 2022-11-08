@@ -1555,6 +1555,23 @@ typedef struct _sai_stat_capability_list_t
 
 } sai_stat_capability_list_t;
 
+typedef struct _sai_object_stat_id_t
+{
+    /** Object type */
+    sai_object_type_t object_type;
+
+    /** Stat enum value */
+    sai_stat_id_t stat_enum;
+
+} sai_object_stat_id_t;
+
+typedef struct _sai_object_stat_list_t
+{
+    uint32_t count;
+    sai_object_stat_id_t *list;
+
+} sai_object_stat_list_t;
+
 typedef enum _sai_object_stage_t
 {
     /** Common stage */

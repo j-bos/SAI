@@ -891,13 +891,13 @@ typedef enum _sai_tam_telemetry_type_t
      * @brief INT TAM
      * All the data relevant on a per packet basis
      */
-    SAI_TAM_TELEMETRY_TYPE_INT
+    SAI_TAM_TELEMETRY_TYPE_INT,
 
     /**
-     * @brief Timeslice TAM
-     * Telemetry captured at short time intervals
+     * @brief Object Stat
+     * Collect specific statistics for requested object-types
      */
-    SAI_TAM_TELEMETRY_TYPE_TIMESLICE
+    SAI_TAM_TELEMETRY_TYPE_OBJECT_STAT,
 
 } sai_tam_telemetry_type_t;
 
@@ -1059,6 +1059,14 @@ typedef enum _sai_tam_tel_type_attr_t
     SAI_TAM_TEL_TYPE_ATTR_REPORT_ID,
 
     /**
+     * @brief Tam list of stats to collect
+     *
+     * @type sai_object_stat_list_t
+     * @flags CREATE_AND_SET
+     */
+    SAI_TAM_TEL_TYPE_ATTR_OBJECT_STATS,
+
+    /**
      * @brief End of Attributes
      */
     SAI_TAM_TEL_TYPE_ATTR_END,
@@ -1166,6 +1174,12 @@ typedef enum _sai_tam_report_type_t
      * @brief Report using vendor extensions
      */
     SAI_TAM_REPORT_TYPE_VENDOR_EXTN,
+
+    /**
+     * @brief Report using timeslice
+     */
+    SAI_TAM_REPORT_TYPE_TIMESLICE,
+
 } sai_tam_report_type_t;
 
 /**
@@ -1273,6 +1287,16 @@ typedef enum _sai_tam_report_attr_t
      * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_IPFIX
      */
     SAI_TAM_REPORT_ATTR_TEMPLATE_REPORT_INTERVAL,
+
+    /**
+     * @brief Template report interval in minutes
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_AND_SET
+     * @default 15
+     * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_IPFIX
+     */
+    SAI_TAM_REPORT_ATTR_NUMBER_OF_SLICES,
 
     /**
      * @brief End of Attributes
@@ -1864,6 +1888,13 @@ typedef enum _sai_tam_event_type_t
      * @brief Buffer service pool threshold event
      */
     SAI_TAM_EVENT_TYPE_BSP,
+
+    /**
+     * @brief Periodically issued telemetry reports, with the period defined using
+     * SAI_TAM_EVENT_THRESHOLD_ATTR_ABS_VALUE in time units
+     */
+    SAI_TAM_EVENT_TYPE_PERIODIC,
+
 } sai_tam_event_type_t;
 
 /**
