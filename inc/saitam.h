@@ -1063,6 +1063,7 @@ typedef enum _sai_tam_tel_type_attr_t
      *
      * @type sai_object_stat_list_t
      * @flags CREATE_AND_SET
+     * @default empty
      */
     SAI_TAM_TEL_TYPE_ATTR_OBJECT_STATS,
 
