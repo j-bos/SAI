@@ -1289,12 +1289,12 @@ typedef enum _sai_tam_report_attr_t
     SAI_TAM_REPORT_ATTR_TEMPLATE_REPORT_INTERVAL,
 
     /**
-     * @brief Template report interval in minutes
+     * @brief Number of timeslices per report
      *
      * @type sai_uint32_t
-     * @flags CREATE_AND_SET
-     * @default 15
-     * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_IPFIX
+     * @flags CREATE_ONLY
+     * @default 0
+     * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_TIMESLICE
      */
     SAI_TAM_REPORT_ATTR_NUMBER_OF_SLICES,
 
