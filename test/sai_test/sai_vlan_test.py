@@ -57,7 +57,7 @@ class Vlan_Domain_Forwarding_Test(T0TestBase):
                                         vlan_vid=10,
                                         ip_id=101,
                                         ip_ttl=64)
-
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[1].dev_port_index, pkt)
                 verify_packet(
@@ -74,6 +74,7 @@ class Vlan_Domain_Forwarding_Test(T0TestBase):
                                         vlan_vid=20,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[9].dev_port_index, pkt)
                 verify_packet(
@@ -111,6 +112,7 @@ class UntagAccessToAccessTest(T0TestBase):
                                         eth_src=self.servers[1][1].mac,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[1].dev_port_index, pkt)
                 verify_packet(
@@ -124,6 +126,7 @@ class UntagAccessToAccessTest(T0TestBase):
                                         eth_src=self.servers[1][9].mac,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[9].dev_port_index, pkt)
                 verify_packet(
@@ -162,6 +165,7 @@ class MismatchDropTest(T0TestBase):
                                         vlan_vid=20,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[9].dev_port_index, pkt)
                 verify_no_other_packets(self, timeout=2)
@@ -174,6 +178,7 @@ class MismatchDropTest(T0TestBase):
                                         vlan_vid=10,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[1].dev_port_index, pkt)
                 verify_no_other_packets(self, timeout=2)
@@ -211,6 +216,7 @@ class TaggedFrameFilteringTest(T0TestBase):
                                         vlan_vid=10,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[1].dev_port_index, pkt)
                 verify_no_other_packets(self, timeout=1)
@@ -249,6 +255,7 @@ class UnTaggedFrameFilteringTest(T0TestBase):
                                         eth_src=self.servers[1][1].mac,
                                         ip_id=101,
                                         ip_ttl=64)
+                self.dataplane.flush()
                 send_packet(
                     self, self.dut.port_obj_list[1].dev_port_index, pkt)
                 verify_no_other_packets(self, timeout=1)
@@ -463,7 +470,7 @@ class TaggedMacLearningTest(T0TestBase):
             verify_packet(self, tagged_pkt,
                           self.dut.port_obj_list[2].dev_port_index)
             verify_no_other_packets(self, timeout=2)
-            sleep(2)  # wait for add mac entry
+            sleep(5)  # wait for add mac entry
             available_fdb_entry_cnt_now = sai_thrift_get_switch_attribute(
                 self.client,
                 available_fdb_entry=True)['available_fdb_entry']
