@@ -1194,6 +1194,23 @@ typedef struct _sai_port_err_status_list_t
     sai_port_err_status_t *list;
 } sai_port_err_status_list_t;
 
+typedef struct _sai_object_stat_id_t
+{
+    /** Object type */
+    sai_object_type_t object_type;
+
+    /** Stat enum value */
+    sai_stat_id_t stat_enum;
+
+} sai_object_stat_id_t;
+
+typedef struct _sai_object_stat_list_t
+{
+    uint32_t count;
+    sai_object_stat_id_t *list;
+
+} sai_object_stat_list_t;
+
 /**
  * @brief Data Type
  *
@@ -1377,6 +1394,9 @@ typedef union _sai_attribute_value_t
 
     /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_IP_PREFIX_LIST */
     sai_ip_prefix_list_t ipprefixlist;
+
+    /** @validonly meta->attrvaluetype == SAI_ATTR_VALUE_TYPE_OBJECT_STAT_LIST */
+    sai_object_stat_list_t objectstatlist;
 } sai_attribute_value_t;
 
 /**

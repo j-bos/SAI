@@ -891,7 +891,13 @@ typedef enum _sai_tam_telemetry_type_t
      * @brief INT TAM
      * All the data relevant on a per packet basis
      */
-    SAI_TAM_TELEMETRY_TYPE_INT
+    SAI_TAM_TELEMETRY_TYPE_INT,
+
+    /**
+     * @brief Object Stat
+     * Collect specific statistics for requested object-types
+     */
+    SAI_TAM_TELEMETRY_TYPE_OBJECT_STAT,
 
 } sai_tam_telemetry_type_t;
 
@@ -1053,6 +1059,15 @@ typedef enum _sai_tam_tel_type_attr_t
     SAI_TAM_TEL_TYPE_ATTR_REPORT_ID,
 
     /**
+     * @brief Tam list of stats to collect
+     *
+     * @type sai_object_stat_list_t
+     * @flags CREATE_AND_SET
+     * @default empty
+     */
+    SAI_TAM_TEL_TYPE_ATTR_OBJECT_STATS,
+
+    /**
      * @brief End of Attributes
      */
     SAI_TAM_TEL_TYPE_ATTR_END,
@@ -1160,6 +1175,12 @@ typedef enum _sai_tam_report_type_t
      * @brief Report using vendor extensions
      */
     SAI_TAM_REPORT_TYPE_VENDOR_EXTN,
+
+    /**
+     * @brief Report using time slice
+     */
+    SAI_TAM_REPORT_TYPE_TIMESLICE,
+
 } sai_tam_report_type_t;
 
 /**
@@ -1174,6 +1195,28 @@ typedef enum _sai_tam_report_mode_t
     SAI_TAM_REPORT_MODE_BULK,
 
 } sai_tam_report_mode_t;
+
+/**
+ * @brief TAM report interval units
+ */
+typedef enum _sai_tam_report_interval_unit_t
+{
+    /**
+     * @brief Report interval unit nanosecond
+     */
+    SAI_TAM_REPORT_INTERVAL_UNIT_NANOSEC,
+
+    /**
+     * @brief Report interval unit microsecond
+     */
+    SAI_TAM_REPORT_INTERVAL_UNIT_USEC,
+
+    /**
+     * @brief Report interval unit millisecond
+     */
+    SAI_TAM_REPORT_INTERVAL_UNIT_MSEC,
+
+} sai_tam_report_interval_unit_t;
 
 /**
  * @brief Attributes for TAM report
@@ -1239,7 +1282,7 @@ typedef enum _sai_tam_report_attr_t
     SAI_TAM_REPORT_ATTR_REPORT_MODE,
 
     /**
-     * @brief Report Interval in micro seconds
+     * @brief Report Interval
      *
      * @type sai_uint32_t
      * @flags CREATE_AND_SET
@@ -1267,6 +1310,26 @@ typedef enum _sai_tam_report_attr_t
      * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_IPFIX
      */
     SAI_TAM_REPORT_ATTR_TEMPLATE_REPORT_INTERVAL,
+
+    /**
+     * @brief Report Interval Units
+     *
+     * @type sai_tam_report_interval_unit_t
+     * @flags CREATE_AND_SET
+     * @default SAI_TAM_REPORT_INTERVAL_UNIT_USEC
+     * @validonly SAI_TAM_REPORT_ATTR_REPORT_MODE == SAI_TAM_REPORT_MODE_BULK
+     */
+    SAI_TAM_REPORT_ATTR_REPORT_INTERVAL_UNIT,
+
+    /**
+     * @brief Number of time slices per report
+     *
+     * @type sai_uint32_t
+     * @flags CREATE_ONLY
+     * @default 0
+     * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_TIMESLICE
+     */
+    SAI_TAM_REPORT_ATTR_NUMBER_OF_TIMESLICES,
 
     /**
      * @brief End of Attributes
@@ -1858,6 +1921,7 @@ typedef enum _sai_tam_event_type_t
      * @brief Buffer service pool threshold event
      */
     SAI_TAM_EVENT_TYPE_BSP,
+
 } sai_tam_event_type_t;
 
 /**

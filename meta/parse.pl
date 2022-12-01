@@ -3974,7 +3974,7 @@ sub ProcessStructItem
 
     return if $type eq "bool";
 
-    return if $type =~ /^sai_(u?int\d+|ip[46]|mac|cos|vlan_id|queue_index)_t/; # primitives, we could get that from defines
+    return if $type =~ /^sai_(u?int\d+|ip[46]|mac|cos|vlan_id|queue_index|stat_id)_t/; # primitives, we could get that from defines
     return if $type =~ /^u?int\d+_t/;
     return if $type =~ /^sai_[su]\d+_list_t/;
 
