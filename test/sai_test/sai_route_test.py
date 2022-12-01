@@ -1172,3 +1172,115 @@ class RouteSameSipDipv6Test(T0TestBase):
     def tearDown(self):
         super().tearDown()
 
+class SviMacLearningTest(T0TestBase):
+    """
+    Verify route to svi and learning
+    """
+
+    def setUp(self):
+        """
+        Test the basic setup process.
+        """
+        super().setUp()
+    
+    def sviMacLearningTest(self):
+        """
+        For mac learning, send packet with SMAC:ServerX_MAC DMAC: PORT3 MAC and DIP: Port10 Server_IP on port4 (learn ServerX_MAC on port4)
+        Received packet with the DMAC:Port10 Server_MAC, SMAC: SWITCH_MAC and DIP: Port10 Server_IP on port10
+        For check mac learning from L2, check if fdb entries increase.
+        """
+        print("SviMacLearningTest")
+
+        dmac4 = '00:11:22:33:44:55'
+        available_fdb_entry_cnt_past = sai_thrift_get_switch_attribute(
+                self.client,
+                available_fdb_entry=True)['available_fdb_entry']
+
+        self.recv_dev_port_idxs = self.get_dev_port_indexes(self.servers[12][1].l3_lag_obj.member_port_indexs)
+
+        pkt = simple_tcp_packet(eth_dst=ROUTER_MAC,
+                                eth_src=dmac4,
+                                ip_dst=self.servers[12][1].ipv4,
+                                ip_id=105,
+                                ip_ttl=64)
+        exp_pkt = simple_tcp_packet(eth_src=ROUTER_MAC,
+                                    eth_dst=self.servers[12][1].l3_lag_obj.neighbor_mac,
+                                    ip_dst=self.servers[12][1].ipv4,
+                                    ip_id=105,
+                                    ip_ttl=63)
+
+        send_packet(self, self.dut.port_obj_list[5].dev_port_index, pkt)
+        verify_packet_any_port(self, exp_pkt, self.recv_dev_port_idxs)
+
+        sleep(5)  # wait for add mac entry
+        available_fdb_entry_cnt_now = sai_thrift_get_switch_attribute(
+                self.client,
+                available_fdb_entry=True)['available_fdb_entry']
+        self.assertEqual(available_fdb_entry_cnt_now -
+                             available_fdb_entry_cnt_past, -1)
+        
+
+    def runTest(self):
+        try:
+            self.sviMacLearningTest()
+        finally:
+            pass
+    
+    def tearDown(self):
+        super().tearDown()
+
+class SviMacLearningV6Test(T0TestBase):
+    """
+    Verify route to svi and learning
+    """
+
+    def setUp(self):
+        """
+        Test the basic setup process.
+        """
+        super().setUp()
+    
+    def sviMacLearningV6Test(self):
+        """
+        For mac learning, send packet with SMAC:ServerX_MAC DMAC: PORT3 MAC and DIP: Port10 Server_IP on port5 (learn ServerX_MAC on port4)
+        Received packet with the DMAC:Port10 Server_MAC, SMAC: SWITCH_MAC and DIP: Port10 Server_IP on port10
+        For check mac learning from L2, check if fdb entries increase.
+        """
+        print("SviMacLearningTest")
+
+        dmac4 = '00:11:22:33:44:55'
+        available_fdb_entry_cnt_past = sai_thrift_get_switch_attribute(
+                self.client,
+                available_fdb_entry=True)['available_fdb_entry']
+
+        self.recv_dev_port_idxs = self.get_dev_port_indexes(self.servers[12][1].l3_lag_obj.member_port_indexs)
+
+        pkt_v6 = simple_udpv6_packet(eth_dst=ROUTER_MAC,
+                                     eth_src=dmac4,
+                                     ipv6_dst=self.servers[12][1].ipv6,
+                                     ipv6_hlim=64)
+        exp_pkt_v6 = simple_udpv6_packet(eth_src=ROUTER_MAC,
+                                         eth_dst=self.servers[12][1].l3_lag_obj.neighbor_mac,
+                                         ipv6_dst=self.servers[12][1].ipv6,
+                                         ipv6_hlim=63)
+        self.dataplane.flush()
+        send_packet(self, self.dut.port_obj_list[5].dev_port_index, pkt_v6)
+        verify_packet_any_port(self, exp_pkt_v6, self.recv_dev_port_idxs)
+
+        sleep(5)  # wait for add mac entry
+        available_fdb_entry_cnt_now = sai_thrift_get_switch_attribute(
+                self.client,
+                available_fdb_entry=True)['available_fdb_entry']
+        self.assertEqual(available_fdb_entry_cnt_now -
+                             available_fdb_entry_cnt_past, -1)
+        
+
+    def runTest(self):
+        try:
+            self.sviMacLearningV6Test()
+        finally:
+            pass
+    
+    def tearDown(self):
+        super().tearDown()
+
