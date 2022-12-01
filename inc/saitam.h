@@ -1297,7 +1297,7 @@ typedef enum _sai_tam_report_attr_t
      * @default 0
      * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_TIMESLICE
      */
-    SAI_TAM_REPORT_ATTR_NUMBER_OF_SLICES,
+    SAI_TAM_REPORT_ATTR_NUMBER_OF_TIMESLICES,
 
     /**
      * @brief End of Attributes
