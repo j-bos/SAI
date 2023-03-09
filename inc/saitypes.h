@@ -1197,10 +1197,13 @@ typedef struct _sai_port_err_status_list_t
 typedef struct _sai_object_stat_id_t
 {
     /** Object type */
-    sai_object_type_t object_type;
+    sai_object_id_t oid;
 
     /** Stat enum value */
     sai_stat_id_t stat_enum;
+
+    /** Counter identifier for telemetry packets */
+    uint64_t telemetry_id;
 
 } sai_object_stat_id_t;
 
