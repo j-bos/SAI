@@ -1176,11 +1176,6 @@ typedef enum _sai_tam_report_type_t
      */
     SAI_TAM_REPORT_TYPE_VENDOR_EXTN,
 
-    /**
-     * @brief Report using time slice
-     */
-    SAI_TAM_REPORT_TYPE_TIMESLICE,
-
 } sai_tam_report_type_t;
 
 /**
@@ -1320,16 +1315,6 @@ typedef enum _sai_tam_report_attr_t
      * @validonly SAI_TAM_REPORT_ATTR_REPORT_MODE == SAI_TAM_REPORT_MODE_BULK
      */
     SAI_TAM_REPORT_ATTR_REPORT_INTERVAL_UNIT,
-
-    /**
-     * @brief Number of time slices per report
-     *
-     * @type sai_uint32_t
-     * @flags CREATE_ONLY
-     * @default 0
-     * @validonly SAI_TAM_REPORT_ATTR_TYPE == SAI_TAM_REPORT_TYPE_TIMESLICE
-     */
-    SAI_TAM_REPORT_ATTR_NUMBER_OF_TIMESLICES,
 
     /**
      * @brief End of Attributes
