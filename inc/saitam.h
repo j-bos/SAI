@@ -1059,15 +1059,6 @@ typedef enum _sai_tam_tel_type_attr_t
     SAI_TAM_TEL_TYPE_ATTR_REPORT_ID,
 
     /**
-     * @brief Tam list of stats to collect
-     *
-     * @type sai_object_stat_list_t
-     * @flags CREATE_AND_SET
-     * @default empty
-     */
-    SAI_TAM_TEL_TYPE_ATTR_OBJECT_STATS,
-
-    /**
      * @brief End of Attributes
      */
     SAI_TAM_TEL_TYPE_ATTR_END,
@@ -2124,6 +2115,113 @@ typedef sai_status_t (*sai_set_tam_event_attribute_fn)(
         _In_ const sai_attribute_t *attr);
 
 /**
+ * @brief Counter Subscription attributes
+ */
+typedef enum _sai_tam_counter_subscription_attr_t
+{
+    /**
+     * @brief Start of Attributes
+     */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
+
+    /**
+     * @brief TAM object
+     *
+     * @type sai_object_id_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     * @objects SAI_OBJECT_TYPE_TAM
+     */
+    SAI_TAM_COUNTER_SUBSCRIPTION_TAM,
+
+    /**
+     * @brief Subscribed object
+     *
+     * @type sai_object_id_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_OBJECT_ID,
+
+    /**
+     * @brief Subscribed stat enum
+     *
+     * @type sai_stat_id_t
+     * @flags MANDATORY_ON_CREATE | CREATE_ONLY
+     */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ENUM,
+
+     /**
+     * @brief Telemetry label
+     *
+     * Label to identify this counter in telemetry reports.
+     *
+     * @type uint64_t
+     * @flags CREATE_ONLY
+     * @default disabled
+     */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_LABEL,
+
+    /** Custom range base value */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_CUSTOM_RANGE_START = 0x10000000,
+
+    /** End of custom range base */
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_CUSTOM_RANGE_END
+
+} sai_tam_counter_subscription_attr_t
+
+/**
+ * @brief Create a counter subscription
+ *
+ * @param[out] tam_counter_subscription_id Counter subscription object Id
+ * @param[in] switch_id Switch object id
+ * @param[in] attr_count Number of attributes
+ * @param[in] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_create_tam_counter_subscription_fn)(
+        _Out_ sai_object_id_t *tam_counter_subscription_id,
+        _In_ sai_object_id_t switch_id,
+        _In_ uint32_t attr_count,
+        _In_ const sai_attribute_t *attr_list);
+
+/**
+ * @brief Delete a specified counter subscription
+ *
+ * @param[in] tam_counter_subscription_id Counter Subscription object id
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_remove_tam_counter_subscription_fn)(
+        _In_ sai_object_id_t tam_counter_subscription_id);
+
+/**
+ * @brief Get values for specified event object attributes
+ *
+ * @param[in] tam_counter_subscription_id Counter Subscription object id
+ * @param[in] attr_count Number of attributes
+ * @param[inout] attr_list Array of attributes
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_get_tam_counter_subscription_attribute_fn)(
+        _In_ sai_object_id_t tam_counter_subscription_id,
+        _In_ uint32_t attr_count,
+        _Inout_ sai_attribute_t *attr_list);
+
+/**
+ * @brief Set value for a specified counter subscription object attribute
+ *
+ * @param[in] tam_counter_subscription_id Counter Subscription object id
+ * @param[in] attr Attribute
+ *
+ * @return #SAI_STATUS_SUCCESS on success, failure status code on error
+ */
+typedef sai_status_t (*sai_set_tam_counter_subscription_attribute_fn)(
+        _In_ sai_object_id_t tam_counter_subscription_id,
+        _In_ const sai_attribute_t *attr);
+
+
+/**
  * @brief TAM event callback
  *
  * @count attr_list[attr_count]
@@ -2224,6 +2322,11 @@ typedef struct _sai_tam_api_t
     sai_remove_tam_event_fn                   remove_tam_event;
     sai_set_tam_event_attribute_fn            set_tam_event_attribute;
     sai_get_tam_event_attribute_fn            get_tam_event_attribute;
+
+    sai_create_tam_counter_subscription_fn         create_tam_counter_subscription;
+    sai_remove_tam_counter_subscription_fn         remove_tam_counter_subscription;
+    sai_set_tam_counter_subscription_attribute_fn  set_tam_counter_subscription_attribute;
+    sai_get_tam_counter_subscription_attribute_fn  get_tam_counter_subscription_attribute;
 } sai_tam_api_t;
 
 /**

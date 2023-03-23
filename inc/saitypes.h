@@ -1194,26 +1194,6 @@ typedef struct _sai_port_err_status_list_t
     sai_port_err_status_t *list;
 } sai_port_err_status_list_t;
 
-typedef struct _sai_object_stat_id_t
-{
-    /** Object type */
-    sai_object_id_t oid;
-
-    /** Stat enum value */
-    sai_stat_id_t stat_enum;
-
-    /** Counter identifier for telemetry packets */
-    uint64_t telemetry_id;
-
-} sai_object_stat_id_t;
-
-typedef struct _sai_object_stat_list_t
-{
-    uint32_t count;
-    sai_object_stat_id_t *list;
-
-} sai_object_stat_list_t;
-
 /**
  * @brief Data Type
  *
