@@ -51,9 +51,9 @@ typedef enum _sai_tam_counter_subscription_attr_t
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_OBJECT_ID,
 
     /**
-     * @brief Subscribed stat enum
+     * @brief Subscribed sai_stat_id_t
      *
-     * @type sai_stat_id_t
+     * @type uint32_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
      */
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ID,
@@ -95,7 +95,7 @@ sai_attr_list[1].id = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_OBJECT_ID;
 sai_attr_list[1].value.oid = sai_ipg1_obj;
 
 sai_attr_list[2].id = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ID;
-sai_attr_list[2].value.stat_id = SAI_INGRESS_PRIORITY_GROUP_STAT_CURR_OCCUPANCY_BYTES;
+sai_attr_list[2].value.u32 = SAI_INGRESS_PRIORITY_GROUP_STAT_CURR_OCCUPANCY_BYTES;
 
 sai_attr_list[3].id = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_LABEL;
 sai_attr_list[3].value.u64 = 47;  // NOS-provided label
