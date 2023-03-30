@@ -895,7 +895,8 @@ typedef enum _sai_tam_telemetry_type_t
 
     /**
      * @brief Object Stat
-     * Collect specific statistics for requested object-types
+     * Collect specific statistics for requested objects, using 
+     * SAI_TAM_COUNTER_SUBSCRIPTION objects
      */
     SAI_TAM_TELEMETRY_TYPE_OBJECT_STAT,
 
@@ -2131,7 +2132,7 @@ typedef enum _sai_tam_counter_subscription_attr_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
      * @objects SAI_OBJECT_TYPE_TAM
      */
-    SAI_TAM_COUNTER_SUBSCRIPTION_TAM,
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_TEL_TYPE = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
 
     /**
      * @brief Subscribed object
@@ -2147,7 +2148,7 @@ typedef enum _sai_tam_counter_subscription_attr_t
      * @type sai_stat_id_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
      */
-    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ENUM,
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ID,
 
      /**
      * @brief Telemetry label
