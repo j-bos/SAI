@@ -34,13 +34,13 @@ typedef enum _sai_tam_counter_subscription_attr_t
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
 
     /**
-     * @brief TAM report object
+     * @brief TAM telemetry type object
      *
      * @type sai_object_id_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
      * @objects SAI_OBJECT_TYPE_TAM
      */
-    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_REPORT_ID = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
+    SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_TEL_TYPE = SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
 
     /**
      * @brief Subscribed object
@@ -51,9 +51,9 @@ typedef enum _sai_tam_counter_subscription_attr_t
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_OBJECT_ID,
 
     /**
-     * @brief Subscribed sai_stat_id_t
+     * @brief Subscribed stat enum
      *
-     * @type uint32_t
+     * @type sai_uint32_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
      */
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_STAT_ID,
@@ -63,9 +63,9 @@ typedef enum _sai_tam_counter_subscription_attr_t
      *
      * Label to identify this counter in telemetry reports.
      *
-     * @type uint64_t
+     * @type sai_uint64_t
      * @flags CREATE_ONLY
-     * @default disabled
+     * @default 0
      */
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_LABEL,
 
@@ -124,7 +124,7 @@ sai_create_tam_telemetry_fn(
     attr_count,
     sai_attr_list);
 
-// Example: Create TAM object and attach to monitored objects:
+// Example: Create TAM object and bind to monitored objects:
 
 sai_attr_list[1].id = SAI_TAM_ATTR_TAM_TELEMETRY_OBJECTS_LIST;
 sai_attr_list[1].value.objlist.count = 1;

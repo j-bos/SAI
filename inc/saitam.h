@@ -2126,7 +2126,7 @@ typedef enum _sai_tam_counter_subscription_attr_t
     SAI_TAM_COUNTER_SUBSCRIPTION_ATTR_START,
 
     /**
-     * @brief TAM object
+     * @brief TAM telemetry type object
      *
      * @type sai_object_id_t
      * @flags MANDATORY_ON_CREATE | CREATE_ONLY
