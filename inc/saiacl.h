@@ -2899,8 +2899,10 @@ typedef enum _sai_acl_entry_attr_t
     SAI_ACL_ENTRY_ATTR_FIELD_ACL_MIRROR_SESSION_ID = SAI_ACL_ENTRY_ATTR_FIELD_START + 0x168,
 
     /**
-     * @brief Route destination object: next hop or next hop group, or a router
-     * interface for a directly reachable route
+     * @brief Route destination object: next hop or next hop group, or egress
+     * router interface for a directly reachable route.
+     *
+     * May be updated by redirect action by ACLs in previous stages.
      *
      * @type sai_acl_field_data_t sai_object_id_t
      * @flags CREATE_AND_SET
