@@ -2902,7 +2902,7 @@ typedef enum _sai_acl_entry_attr_t
      * @brief Route destination object: next hop or next hop group, or egress
      * router interface for a directly reachable route.
      *
-     * May be updated by redirect action by ACLs in previous stages.
+     * Value may be updated by redirect action of ACL entries in previous stages.
      *
      * @type sai_acl_field_data_t sai_object_id_t
      * @flags CREATE_AND_SET
